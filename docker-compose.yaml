@@ -2,36 +2,35 @@ version: "3.3"
 
 services:
   geoserver:
-    build: ./geoserver
-    image: open-city-toolkit/geoserver
+    image: abhinaypodugu151/geoserver
     ports:
       - 8080:8080
     volumes:
       - type: volume
         source: geoserver_data
         target: /usr/share/geoserver/data_dir
+
   webapp:
-    build: ./webapp
-    image: open-city-toolkit/webapp
+    image: abhinaypodugu151/webapp
     ports:
       - 3000:3000
     volumes:
       - type: volume
         source: grass
-        target: /oct/grass
+        target: /usr/src/app/oct/grass
       - type: volume
         source: output
-        target: /oct/output
+        target: /usr/src/app/oct/output
       - type: volume
         source: geoserver_data
         target: /usr/share/geoserver/data_dir
     environment:
-      - DATA_FROM_BROWSER_DIR=/oct/data_from_browser
-      - GRASS_DIR=/oct/grass
-      - OUTPUT_DIR=/oct/output
-      - GEOSERVER_URL=http://localhost:8080/
-      - INITIAL_LAT=
-      - INITIAL_LON=
+      - DATA_FROM_BROWSER_DIR=/usr/src/app/oct/data_from_browser
+      - GRASS_DIR=/usr/src/app/oct/grass
+      - OUTPUT_DIR=/usr/src/app/oct/output
+      - GEOSERVER_URL=http://glorious-eureka-x6gxp6xj7wgfp5qx-8080.app.github.dev/
+      - INITIAL_LAT=20.264444444444
+      - INITIAL_LON=85.828055555556
       - USE_LANG=
 
 volumes:
